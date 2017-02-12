@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:35:19 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/28 13:55:01 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/11 16:43:05 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int8_t	ft_ls_get_dir(t_arr *files, char *path)
 	struct dirent	*dp;
 	t_ft_ls_file	tmp;
 
-	GRD1((dirp = opendir(path)) == 0, return (-1));
-	GRD1(arr_init(files, 10, sizeof(t_ft_ls_file)) == -1, return (-1));
+	GRD((dirp = opendir(path)) == 0, -1);
+	GRD(arr_init(files, 10, (t_arr_elm){sizeof(t_ft_ls_file), 0, ) == -1, -1);
 	while ((dp = readdir(dirp)) != 0)
 	{
 		if (dp->d_name[0] == '.' && !(g_ft_ls_flgs & 0x4))
@@ -63,15 +63,14 @@ static int8_t	ft_ls_get_dir(t_arr *files, char *path)
 	return (0);
 }
 
-void			ft_ls_print_dir(char *path)
+int8_t			ft_ls_print_dir(char *path)
 {
 	t_arr			files;
 	t_ft_ls_file	*tmp;
 	size_t			i;
 
-	GRD3(ft_ls_get_dir(&files, path) == -1
-		, dprintf(STDERR_FILENO, "ls: %s: %s\n"
-		, ft_ls_basename(path), strerror(errno)), ret = -1, return);
+	GRD3(ft_ls_get_dir(&files, path) == -1, dprintf(STDERR_FILENO
+		, "ls: %s: %s\n", ft_ls_basename(path), strerror(errno)), ret = -1, return);
 	GRD3(files.len == 0, ft_ls_del(&files), printf("\n"), return);
 	tmp = (t_ft_ls_file *)files.arr;
 	i = 0;

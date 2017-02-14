@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2017/02/11 17:25:29 by hkalia           ###   ########.fr        #
+#    Updated: 2017/02/14 13:37:44 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ CFLAGS		+=	-Wall -Wextra
 CFLAGS		+=	-Werror
 CFLAGS		+=	-I includes -I libarr/includes -I libft/includes -I libftprintf/includes
 LDFLAGS		+=	-L libarr -larr -L libft/ -lft -L libftprintf -lftprintf
+ifdef ALLOCWRAP
+	LDFLAGS += $(HOME)/lib/alloc_wrap.c -ldl
+endif
 LIBARR		:=	libarr/libarr.a
 LIBFT		:=	libft/libft.a
 LIBFTPRINTF	:=	libftprintf/libftprintf.a
@@ -54,7 +57,7 @@ $(OBJ): %.o: %.c
 $(NAME): $(LIBARR) $(LIBFT) $(LIBFTPRINTF) $(OBJ)
 	@printf "\r\e[32mCompiling...(%d/%d)[DONE]\n\e[0m" $(MAX) $(MAX)
 	@printf "\e[32mLinking... \e[0m"
-	@$(CC) $(LDFLAGS) alloc_wrap.c $(OBJ) -o $(NAME)
+	@$(CC) $(LDFLAGS) -o $@ $^
 	@printf "\e[32m[DONE]\e[0m\n"
 
 clean:

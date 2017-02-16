@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 12:26:28 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/28 13:03:16 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/15 20:42:22 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ static void	print_lnk(char *path)
 
 	ft_bzero(tmp, PATH_MAX + 1);
 	readlink(path, tmp, PATH_MAX);
-	printf(" -> %s", tmp);
+	ft_printf(" -> %s", tmp);
 }
 
 static void	print_rwx(mode_t mode)
 {
-	printf((mode & S_IRUSR) ? "r" : "-");
-	printf((mode & S_IWUSR) ? "w" : "-");
+	ft_printf((mode & S_IRUSR) ? "r" : "-");
+	ft_printf((mode & S_IWUSR) ? "w" : "-");
 	if (mode & S_ISUID)
-		printf((mode & S_IXUSR) ? "s" : "S");
+		ft_printf((mode & S_IXUSR) ? "s" : "S");
 	else
-		printf((mode & S_IXUSR) ? "x" : "-");
-	printf((mode & S_IRGRP) ? "r" : "-");
-	printf((mode & S_IWGRP) ? "w" : "-");
+		ft_printf((mode & S_IXUSR) ? "x" : "-");
+	ft_printf((mode & S_IRGRP) ? "r" : "-");
+	ft_printf((mode & S_IWGRP) ? "w" : "-");
 	if (mode & S_ISGID)
-		printf((mode & S_IXGRP) ? "s" : "S");
+		ft_printf((mode & S_IXGRP) ? "s" : "S");
 	else
-		printf((mode & S_IXGRP) ? "x" : "-");
-	printf((mode & S_IROTH) ? "r" : "-");
-	printf((mode & S_IWOTH) ? "w" : "-");
+		ft_printf((mode & S_IXGRP) ? "x" : "-");
+	ft_printf((mode & S_IROTH) ? "r" : "-");
+	ft_printf((mode & S_IWOTH) ? "w" : "-");
 	if (mode & S_ISVTX)
-		printf((mode & S_IXUSR) ? "t" : "T");
+		ft_printf((mode & S_IXUSR) ? "t" : "T");
 	else
-		printf((mode & S_IXOTH) ? "x" : "-");
+		ft_printf((mode & S_IXOTH) ? "x" : "-");
 }
 
 static void	print_type(mode_t mode)
@@ -65,7 +65,7 @@ static void	print_type(mode_t mode)
 		c = '-';
 	else
 		c = '-';
-	printf("%c", c);
+	ft_printf("%c", c);
 }
 
 void		ft_ls_get_widths(int *widths, struct stat info)
@@ -87,18 +87,18 @@ void		ft_ls_print_l(int *widths, t_ft_ls_file file)
 	tmp = ctime(&file.info.st_mtimespec.tv_sec);
 	print_type(file.info.st_mode);
 	print_rwx(file.info.st_mode);
-	printf(listxattr(file.path, 0, 0, XATTR_NOFOLLOW) > 0 ? "@" : " ");
-	printf(" %*d %-*s  %-*s  %*lld %.6s"
+	ft_printf(listxattr(file.path, 0, 0, XATTR_NOFOLLOW) > 0 ? "@" : " ");
+	ft_printf(" %*d %-*s  %-*s  %*lld %.6s"
 	, widths[0], file.info.st_nlink
 	, widths[1], getpwuid(file.info.st_uid)->pw_name
 	, widths[2], getgrgid(file.info.st_gid)->gr_name
 	, widths[3], file.info.st_size, &tmp[4]);
 	if (diff > 15552000 || diff < -15552000)
-		printf("  %.4s", &tmp[20]);
+		ft_printf("  %.4s", &tmp[20]);
 	else
-		printf(" %.5s", &tmp[11]);
-	printf(" %s", file.basename);
+		ft_printf(" %.5s", &tmp[11]);
+	ft_printf(" %s", file.basename);
 	if (S_ISLNK(file.info.st_mode))
 		print_lnk(file.path);
-	printf("\n");
+	ft_printf("\n");
 }

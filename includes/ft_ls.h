@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:25:15 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/11 16:40:51 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/15 20:47:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct	s_ft_ls_file
 	struct stat	info;
 }				t_ft_ls_file;
 
+int8_t			file_dup(void *dst, const void *src);
+void			file_dtr(void *elm);
 int8_t			ft_ls_handle_args(int i, int argc, char **argv);
 void			ft_ls_del(t_arr *files);
 void			ft_ls_sort(t_arr *files);

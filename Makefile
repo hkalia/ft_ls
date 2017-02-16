@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2017/02/14 13:37:44 by hkalia           ###   ########.fr        #
+#    Updated: 2017/02/15 21:00:37 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,15 @@ CC			:=	gcc
 CFLAGS		+=	-Wall -Wextra
 CFLAGS		+=	-Werror
 CFLAGS		+=	-I includes -I libarr/includes -I libft/includes -I libftprintf/includes
-LDFLAGS		+=	-L libarr -larr -L libft/ -lft -L libftprintf -lftprintf
 ifdef ALLOCWRAP
-	LDFLAGS += $(HOME)/lib/alloc_wrap.c -ldl
+	LDFLAGS	+=	$(HOME)/lib/alloc_wrap.c -ldl
 endif
+LDFLAGS		+=	-L libarr -larr -L libft/ -lft -L libftprintf -lftprintf
 LIBARR		:=	libarr/libarr.a
 LIBFT		:=	libft/libft.a
 LIBFTPRINTF	:=	libftprintf/libftprintf.a
 
-FILES		:=	main
+FILES		:=	main args print_dirs print extra
 
 SRC			:=	$(addprefix srcs/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)

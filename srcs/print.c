@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 12:26:28 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/15 20:42:22 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/15 21:17:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ static void	print_type(mode_t mode)
 void		ft_ls_get_widths(int *widths, struct stat info)
 {
 	widths[0] = MAX(widths[0], (int)ft_nbrlen(info.st_nlink));
-	widths[1] = MAX(widths[1], (int)ft_strlen(getpwuid(info.st_uid)
-					->pw_name));
-	widths[2] = MAX(widths[2], (int)ft_strlen(getgrgid(info.st_gid)
-					->gr_name));
+	widths[1] = MAX(widths[1], (int)ft_strlen(getpwuid(info.st_uid)->pw_name));
+	widths[2] = MAX(widths[2], (int)ft_strlen(getgrgid(info.st_gid)->gr_name));
 	widths[3] = MAX(widths[3], (int)ft_nbrlen(info.st_size));
 }
 

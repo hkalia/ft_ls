@@ -6,14 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:28:07 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/15 20:34:21 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/15 21:19:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 uint8_t			g_ft_ls_flgs = 0;
-int8_t			ret = 0;
 
 static int8_t	parser(int argc, char **argv)
 {
@@ -38,7 +37,8 @@ static int8_t	parser(int argc, char **argv)
 				g_ft_ls_flgs |= 0x8;
 			else if (argv[i][j] == 't')
 				g_ft_ls_flgs |= 0x10;
-			else if (argv[i][j] == '1');
+			else if (argv[i][j] == '1')
+				;
 			else
 				return (-1);
 		}
@@ -48,16 +48,16 @@ static int8_t	parser(int argc, char **argv)
 		GRD(ft_ls_handle_args(i, argc, argv) == -1, -1);
 	else
 		GRD(ft_ls_print_dir(".") == -1, -1);
-	return (ret);
+	return (0);
 }
 
-int		main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	if (argc == 1)
 		GRD(ft_ls_print_dir(".") == -1, -1);
 	else if (argc > 1)
 		GRD(parser(argc, argv) == -1, -1);
 	else
-		return(-1);
-	return (ret);
+		return (-1);
+	return (0);
 }

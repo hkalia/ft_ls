@@ -6,14 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:35:19 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/15 20:50:07 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/15 21:19:57 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 extern uint8_t	g_ft_ls_flgs;
-extern int8_t	ret;
 
 static void		lhandler_dir(t_arr *files)
 {
@@ -37,7 +36,7 @@ static void		lhandler_dir(t_arr *files)
 		ft_ls_print_l(widths, tmp[i++]);
 }
 
-int8_t	ft_ls_get_dir(t_arr *files, char *path)
+int8_t			ft_ls_get_dir(t_arr *files, char *path)
 {
 	DIR				*dirp;
 	struct dirent	*dp;

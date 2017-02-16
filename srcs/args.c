@@ -6,14 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 11:35:59 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/15 21:00:05 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/15 21:18:15 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 extern uint8_t	g_ft_ls_flgs;
-extern int8_t	ret;
 
 char			*ft_ls_basename(char *path)
 {
@@ -81,15 +80,18 @@ int8_t			ft_ls_handle_args(int i, int argc, char **argv)
 	{
 		if (lstat(argv[i], &tmp.info) == -1)
 		{
-			ft_dprintf(STDERR_FILENO, "ls: %s: %s\n", argv[i++], strerror(errno));
+			ft_dprintf(STDERR_FILENO, "ls: %s: %s\n", argv[i++]
+						, strerror(errno));
 			continue ;
 		}
 		tmp.basename = ft_ls_basename(argv[i]);
 		tmp.path = argv[i];
 		if (S_ISDIR(tmp.info.st_mode))
-			GRD2(arr_append(&dirs, &tmp) == -1, arr_dtr(&files), arr_dtr(&dirs), -1);
+			GRD2(arr_append(&dirs, &tmp) == -1, arr_dtr(&files), arr_dtr(&dirs)
+				, -1);
 		else
-			GRD2(arr_append(&files, &tmp) == -1, arr_dtr(&files), arr_dtr(&dirs), -1);
+			GRD2(arr_append(&files, &tmp) == -1, arr_dtr(&files), arr_dtr(&dirs)
+				, -1);
 		++i;
 	}
 	ft_ls_sort(&files);
